@@ -1,2 +1,4 @@
 ---
 # tasks file for drone
+- name: pull down latest deb file
+  get_url: url=http://downloads.drone.io/latest/drone.deb dest=/tmp/drone.deb
