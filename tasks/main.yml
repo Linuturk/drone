@@ -1,4 +1,35 @@
 ---
 # tasks file for drone
+
+- name: install pip
+  apt: name=python-pip cache_valid_time=86400 update_cache=yes
+
+- name: install docker-py
+  pip: name=docker-py version=0.3.0
+
+- name: see if drone is already installed
+  stat: path=/usr/local/bin/drone
+  register: drone_stat
+
+- name: ensure /etc/drone exists
+  file: path=/etc/drone state=directory owner=root group=root mode=0700
+
+- name: should drone be installed
+  set_fact: install_drone={{ not drone_stat.stat.exists or upgrade_drone|default(False)|bool == True }}
+
 - name: pull down latest deb file
-  get_url: url=http://downloads.drone.io/latest/drone.deb dest=/tmp/drone.deb
+  get_url: url=http://downloads.drone.io/latest/drone.deb dest=/tmp/drone.deb force={{ install_drone|default(False)|bool }}
+  register: got_drone
+
+- name: install drone
+  command: dpkg --force-confdef --force-confold -i /tmp/drone.deb
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    DEBIAN_PRIORITY: critical
+  register: drone_dpkg
+  when: install_drone|default(False)|bool
+  notify:
+    - restart drone
+
+- name: ensure drone is started
+  service: name=drone state=started enabled=yes
