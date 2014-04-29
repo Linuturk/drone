@@ -1,2 +1,4 @@
 ---
 # handlers file for drone
+- name: restart drone
+  service: name=drone state=restarted
