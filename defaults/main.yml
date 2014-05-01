@@ -23,5 +23,5 @@ drone_smtp_password: ''
 
 drone_open_invitations: 0
 
-drone_driver: ''
-drone_datasource: ''
+drone_driver: 'sqlite3'
+drone_datasource: 'drone.sqlite'

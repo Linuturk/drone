@@ -56,6 +56,11 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 * `drone_sslcert` Path to SSL certificate
 * `drone_sslkey` Path to SSL key
 
+### Datasource
+
+* `drone_driver` Driver to use for data and configuration storage. Defaults to sqlite3
+* `drone_datasource` The datasource controls the sqllite file name or mysql database connection.
+
 ### Other
 
 * `drone_open_invitations` True/False (boolean). Whether open sign up is enabled. Default `False`.
