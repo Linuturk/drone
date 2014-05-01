@@ -13,5 +13,6 @@ DRONED_OPTS="-port=:{{ drone_port }}
 {%- if drone_sslcert %} -sslcert={{ drone_sslcert }}{% endif %}
 {%- if drone_sslkey %} -sslkey={{ drone_sslkey }}{% endif %}
 {%- if drone_driver %} -driver={{ drone_driver }}{% endif %}
-{%- if drone_datasource %} -datasource={{ drone_datasource }}{% endif %}
+{%- if drone_driver == 'sqlite3' %} -datasource={{ drone_datasource }}{% endif %}
+{%- if drone_driver == 'mysql' %} -datasource="{{ drone_mysql_user }}:{{ drone_mysql_pass }}@tcp({{ drone_mysql_host}}:{{ drone_mysql_port }})/{{ drone_mysql_dbname }}?parseTime=true"{% endif %}
 {%- if drone_path %} -path={{ drone_path }}{% endif %}"
