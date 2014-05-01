@@ -13,6 +13,13 @@ This role requires Ubuntu 14.04 and docker.
 Role Variables
 --------------
 
+* `drone_scheme`: http
+* `drone_hostname`
+* `drone_port`: 80
+* `drone_sslcert`
+* `drone_sslkey`
+* `drone_path`
+
 You can explicitly force drone to update by setting the variable `install_drone=True`. Otherwise, it checks to see if drone is installed before attempting to install it again.
 
 Dependencies
