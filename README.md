@@ -50,7 +50,7 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 
 ### Daemon
 
-* `drone_hostname` Hostname that drone will be accessed on. Default hostname defined in inventory or "ansible\_ssh\_password"
+* `drone_hostname` Hostname that drone will be accessed on. Default hostname defined in inventory or "ansible\_ssh\_host"
 * `drone_port` Port for drone to listen on
 * `drone_scheme` http or https (https requires `drone_sslcert` and `drone_sslkey` and probably `drone_port` configured for `443`)
 * `drone_sslcert` Path to SSL certificate
