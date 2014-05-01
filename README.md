@@ -58,8 +58,15 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 
 ### Datasource
 
-* `drone_driver` Driver to use for data and configuration storage. Defaults to sqlite3
-* `drone_datasource` The datasource controls the sqllite file name or mysql database connection.
+* `drone_driver` Driver to use for data and configuration storage. Defaults to sqlite3.
+* `drone_datasource` The datasource controls the sqllite file name or mysql database connection. Defaults to drone.sqlite.
+* `drone_mysql_user` The mysql user to use. Defaults to drone.
+* `drone_mysql_pass` Defaults to 'changeme123'
+* `drone_mysql_host` Defaults to 'localhost'
+* `drone_mysql_port` Defaults to '3306'
+* `drone_mysql_dbname` Defaults to 'drone_io'
+
+**Note** The MySQL options only apply if the driver is set to `mysql`
 
 ### Other
 
