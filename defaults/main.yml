@@ -25,7 +25,8 @@ drone_open_invitations: 0
 
 drone_driver: 'sqlite3'
 drone_datasource: 'drone.sqlite'
-drone_mysql_user: ''
-drone_mysql_pass: ''
+drone_mysql_user: 'drone'
+drone_mysql_pass: 'changeme123'
 drone_mysql_host: 'localhost'
 drone_mysql_port: '3306'
+drone_mysql_dbname: 'drone_io'
