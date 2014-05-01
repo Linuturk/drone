@@ -89,6 +89,8 @@ BSD
 Author Information
 ------------------
 
+This role is inspired by [sivel.drone](https://github.com/sivel/ansible-drone)
+
 [Rackspace - the open cloud company](http://rackspace.com)
 
 Ask about our DevOps Automation Service - [www.rackspace.com/devops](http://rackspace.com/devops)
