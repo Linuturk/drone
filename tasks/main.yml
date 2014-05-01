@@ -54,7 +54,13 @@
   when: drone_driver == 'sqlite3'
 
 - name: Configure drone settings
-  shell: "sqlite3 /var/lib/drone/{{ drone_datasource }} '.read /etc/drone/drone.sql' && sqlite3 /var/lib/drone/{{ drone_datasource }} 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
+  shell: "sqlite3 /var/lib/drone/{{ drone_datasource }} '.read /etc/drone/drone.sql'"
+  register: drone_after_hash
+  changed_when: False
+  when: drone_driver == 'sqlite3'
+
+- name: Hash tables to validate change
+  shell: "sqlite3 /var/lib/drone/{{ drone_datasource }} 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
   register: drone_after_hash
   changed_when: drone_after_hash.stdout != drone_before_hash.stdout
   when: drone_driver == 'sqlite3'
@@ -83,6 +89,7 @@
 
 - name: configure drone settings
   mysql_db: name="{{ drone_mysql_dbname }}" state=import target=/etc/drone/drone.sql
+  changed_when: False
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
