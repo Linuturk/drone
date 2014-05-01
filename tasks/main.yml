@@ -31,6 +31,31 @@
   notify:
     - restart drone
 
+- name: Install sqlite3 for drone configuration
+  apt:
+    name: sqlite3
+    cache_valid_time: 86400
+    update_cache: yes
+
+- name: Template sqlite file for drone configuration
+  template:
+    src: drone.sql.j2
+    dest: /etc/drone/drone.sql
+    owner: root
+    group: root
+    mode: 0600
+  register: drone_sql
+
+- name: Hash tables to validate change
+  shell: "sqlite3 /var/lib/drone/drone.sqlite 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
+  register: drone_before_hash
+  changed_when: False
+
+- name: Configure drone settings
+  shell: "sqlite3 /var/lib/drone/drone.sqlite '.read /etc/drone/drone.sql' && sqlite3 /var/lib/drone/drone.sqlite 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
+  register: drone_after_hash
+  changed_when: drone_after_hash.stdout != drone_before_hash.stdout
+
 - name: configure drone daemon
   template: src=default.j2 dest=/etc/default/drone owner=root group=root mode=0644
   notify:
