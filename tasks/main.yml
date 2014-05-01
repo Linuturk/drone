@@ -40,14 +40,14 @@
     mode: 0600
   register: drone_sql
 
--- name: Install sqlite3 for drone configuration
+- name: Install sqlite3 for drone configuration
   apt:
     name: sqlite3
     cache_valid_time: 86400
     update_cache: yes
   when: drone_driver == 'sqlite3'
 
- name: Hash tables to validate change
+- name: Hash tables to validate change
   shell: "sqlite3 /var/lib/drone/{{ drone_datasource }} 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
   register: drone_before_hash
   changed_when: False
