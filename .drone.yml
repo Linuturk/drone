@@ -1,4 +1,5 @@
 image: linuturk/ubuntu-ansible
 script:
+  - ansible-galaxy install Rackspace_Automation.base
   - ansible-galaxy install Rackspace_Automation.drone
   - ansible-playbook /var/cache/drone/src/github.com/rack-roles/drone/tests/main.yml --connection=local
