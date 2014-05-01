@@ -31,5 +31,10 @@
   notify:
     - restart drone
 
+- name: configure drone daemon
+  template: src=default.j2 dest=/etc/default/drone owner=root group=root mode=0644
+  notify:
+    - restart drone
+
 - name: ensure drone is started
   service: name=drone state=started enabled=yes
