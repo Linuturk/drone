@@ -12,4 +12,6 @@
 DRONED_OPTS="-port=:{{ drone_port }}
 {%- if drone_sslcert %} -sslcert={{ drone_sslcert }}{% endif %}
 {%- if drone_sslkey %} -sslkey={{ drone_sslkey }}{% endif %}
+{%- if drone_driver %} -driver={{ drone_driver }}{% endif %}
+{%- if drone_datasource %} -datasource={{ drone_datasource }}{% endif %}
 {%- if drone_path %} -path={{ drone_path }}{% endif %}"

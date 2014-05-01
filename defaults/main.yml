@@ -22,3 +22,6 @@ drone_smtp_username: ''
 drone_smtp_password: ''
 
 drone_open_invitations: 0
+
+drone_driver: ''
+drone_datasource: ''
