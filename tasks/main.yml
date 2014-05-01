@@ -68,11 +68,11 @@
 
 - name: ensure the drone database exists
   mysql_db:
-    name: {{ drone_mysql_dbname }}
-    login_host: {{ drone_mysql_host }}
-    login_port: {{ drone_mysql_port }}
-    login_user: {{ drone_mysql_user }}
-    login_password: {{ drone_mysql_pass }}
+    name: "{{ drone_mysql_dbname }}"
+    login_host: "{{ drone_mysql_host }}"
+    login_port: "{{ drone_mysql_port }}"
+    login_user: "{{ drone_mysql_user }}"
+    login_password: "{{ drone_mysql_pass }}"
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
@@ -82,7 +82,7 @@
   when: drone_driver == 'mysql'
 
 - name: configure drone settings
-  mysql_db: name={{ drone_mysql_dbname }} state=import target=/etc/drone/drone.sql
+  mysql_db: name="{{ drone_mysql_dbname }}" state=import target=/etc/drone/drone.sql
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
