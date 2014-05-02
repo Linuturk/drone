@@ -121,4 +121,4 @@ dependencies:
   # Be sure to remove the '[]' above if you add dependencies
   # to this list.
   - Rackspace_Automation.docker
-  
+  - Rackspace_Automation.mysql

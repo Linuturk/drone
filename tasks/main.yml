@@ -65,13 +65,6 @@
   changed_when: drone_after_hash.stdout != drone_before_hash.stdout
   when: drone_driver == 'sqlite3'
 
-- name: Install python-mysqldb for drone configuration
-  apt:
-    name: python-mysqldb
-    cache_valid_time: 86400
-    update_cache: yes
-  when: drone_driver == 'mysql'
-
 - name: ensure the drone user exists
   mysql_user: name={{ drone_mysql_user }} state=present password={{ drone_mysql_pass }} priv={{ drone_mysql_dbname}}.*:ALL
   when: drone_driver == 'mysql'
