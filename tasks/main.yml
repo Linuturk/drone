@@ -77,12 +77,11 @@
   when: drone_driver == 'mysql'
 
 - name: ensure the drone database exists
-  mysql_db:
+  mysql_db: login_password={{ drone_mysql_pass }}
     name: "{{ drone_mysql_dbname }}"
     login_host: "{{ drone_mysql_host }}"
     login_port: "{{ drone_mysql_port }}"
     login_user: "{{ drone_mysql_user }}"
-    login_password: {{ drone_mysql_pass }}
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
