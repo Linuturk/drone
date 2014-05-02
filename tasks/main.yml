@@ -72,6 +72,10 @@
     update_cache: yes
   when: drone_driver == 'mysql'
 
+- name: ensure the drone user exists
+  mysql_user: name={{ drone_mysql_user }} state=present password={{ drone_mysql_pass }} priv={{ drone_mysql_dbname}}.*:ALL
+  when: drone_driver == 'mysql'
+
 - name: ensure the drone database exists
   mysql_db:
     name: "{{ drone_mysql_dbname }}"
