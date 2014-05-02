@@ -74,7 +74,7 @@
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
-  shell: "mysql -u {{ drone_mysql_user }} -p {{ drone_mysql_pass }} -h {{ drone_mysql_host }} -e 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
+  shell: "mysql -u {{ drone_mysql_user }} -p{{ drone_mysql_pass }} -h {{ drone_mysql_host }} {{ drone_mysql_dbname }} -e 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
   register: drone_before_hash
   changed_when: False
   when: drone_driver == 'mysql'
@@ -85,7 +85,7 @@
   when: drone_driver == 'mysql'
 
 - name: Hash tables to validate change
-  shell: "mysql -u {{ drone_mysql_user }} -p {{ drone_mysql_pass }} -h {{ drone_mysql_host }} -e 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
+  shell: "mysql -u {{ drone_mysql_user }} -p{{ drone_mysql_pass }} -h {{ drone_mysql_host }} {{ drone_mysql_dbname }} -e 'SELECT * FROM users; SELECT * FROM settings;' | md5sum"
   register: drone_after_hash
   changed_when: drone_after_hash.stdout != drone_before_hash.stdout
   when: drone_driver == 'mysql'
