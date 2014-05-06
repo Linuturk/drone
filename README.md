@@ -53,8 +53,10 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 * `drone_hostname` Hostname that drone will be accessed on. Default hostname defined in inventory or "ansible\_ssh\_host"
 * `drone_port` Port for drone to listen on
 * `drone_scheme` http or https (https requires `drone_sslcert` and `drone_sslkey` and probably `drone_port` configured for `443`)
-* `drone_sslcert` Path to SSL certificate
-* `drone_sslkey` Path to SSL key
+* `drone_sslcert_location` Path to SSL certificate on the server.
+* `drone_sslkey_location` Path to SSL key on the server.
+* `drone_sslcert_file` Path to SSL certificate from your playbook.
+* `drone_sslkey_file` Path to SSL key from your playbook.
 
 ### Datasource
 
