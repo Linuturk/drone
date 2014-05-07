@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-REPLACE INTO "settings"
+REPLACE INTO `settings`
     (
         id,
         github_key,
@@ -316,7 +316,7 @@ LOCK TABLES `users` WRITE;
 {% if user['state']|default('present') == 'absent' %}
 DELETE FROM "users" WHERE email = '{{ user.email }}';
 {% else %}
-REPLACE INTO "users"
+REPLACE INTO `users`
     (
         id,
         email,
