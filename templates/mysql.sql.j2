@@ -363,19 +363,19 @@ INSERT INTO `users`
 {% if user.admin %}
         admin={{ user["admin"]|default(True)|int }},
 {% endif %}
-{% if user.["github_login"] %}
+{% if user.github_login %}
         github_login='{{ user["github_login"]|default("") }}',
 {% endif %}
-{% if user.["github_token"] %}
+{% if user.github_token %}
         github_token='{{ user["github_token"]|default("") }}',
 {% endif %}
-{% if user.["bitbucket_login"] %}
+{% if user.bitbucket_login %}
         bitbucket_login='{{ user["bitbucket_login"]|default("") }}',
 {% endif %}
-{% if user.["bitbucket_token"] %}
+{% if user.bitbucket_token %}
         bitbucket_token='{{ user["bitbucket_token"]|default("") }}',
 {% endif %}
-{% if user.["bitbucket_secret"] %}
+{% if user.bitbucket_secret %}
         bitbucket_secret='{{ user["bitbucket_secret"]|default("") }}';
 {% endif %}
 {% endif %}
