@@ -366,7 +366,7 @@ INSERT INTO `users`
     ON DUPLICATE KEY UPDATE
         email='{{ user.email }}',
         password='{{ user["password"]|default("") }}',
-        token='{{ user.email|md5|b64encode|truncate(40, True, '') }},
+        token='{{ user.email|md5|b64encode|truncate(40, True, '') }}',
         name='{{ user.name }}',
         gravatar='{{ user.email|md5 }}',
         updated=NOW(),
