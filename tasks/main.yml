@@ -41,16 +41,6 @@
   register: drone_sql
   when: drone_driver == 'sqlite3'
 
-- name: Template SQL file for drone configuration
-  template:
-    src: mysql.sql.j2
-    dest: /etc/drone/drone.sql
-    owner: root
-    group: root
-    mode: 0600
-  register: drone_sql
-  when: drone_driver == 'mysql'
-
 - name: Install sqlite3 for drone configuration
   apt:
     name: sqlite3
@@ -75,6 +65,16 @@
   register: drone_after_hash
   changed_when: drone_after_hash.stdout != drone_before_hash.stdout
   when: drone_driver == 'sqlite3'
+
+- name: Template SQL file for drone configuration
+  template:
+    src: mysql.sql.j2
+    dest: /etc/drone/drone.sql
+    owner: root
+    group: root
+    mode: 0600
+  register: drone_sql
+  when: drone_driver == 'mysql'
 
 - name: ensure the drone user exists
   mysql_user: name={{ drone_mysql_user }} state=present password={{ drone_mysql_pass }} priv={{ drone_mysql_dbname}}.*:ALL
