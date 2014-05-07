@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 {% if user['state']|default('present') == 'absent' %}
 DELETE FROM "users" WHERE email = '{{ user.email }}';
 {% else %}
-REPLACE INTO `users`
+INSERT INTO `users`
     (
         id,
         email,
@@ -350,7 +350,25 @@ REPLACE INTO `users`
         '{{ user["bitbucket_login"]|default("") }}',
         '{{ user["bitbucket_token"]|default("") }}',
         '{{ user["bitbucket_secret"]|default("") }}'
-    );
+    )
+    ON DUPLICATE KEY UPDATE
+        email='{{ user.email }}',
+{% if user['update_password']|default(False) %}
+        password='{{ user["password"]|default("") }}',
+{% else %}
+        password=COALESCE((SELECT password FROM users WHERE email = '{{ user.email }}'), '{{ user["password"]|default("") }}'),
+{% endif %}
+        token=COALESCE((SELECT token FROM users WHERE email = '{{ user.email }}'), '{{ user.email|md5|b64encode|truncate(40, True, '') }}' ),
+        name='{{ user.name }}',
+        gravatar='{{ user.email|md5 }}',
+        created=COALESCE((SELECT created FROM users WHERE email = '{{ user.email }}'), (NOW())),
+        updated=COALESCE((SELECT updated FROM users WHERE email = '{{ user.email }}'), (NOW())),
+        admin={{ user["admin"]|default(True)|int }},
+        github_login='{{ user["github_login"]|default("") }}',
+        github_token='{{ user["github_token"]|default("") }}',
+        bitbucket_login='{{ user["bitbucket_login"]|default("") }}',
+        bitbucket_token='{{ user["bitbucket_token"]|default("") }}',
+        bitbucket_secret='{{ user["bitbucket_secret"]|default("") }}';
 {% endif %}
 {% endfor %}
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
