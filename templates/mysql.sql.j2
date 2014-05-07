@@ -54,6 +54,9 @@ UNLOCK TABLES;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `commits` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `repo_id` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `started` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `finished` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `duration` int(11) DEFAULT NULL,
