@@ -36,6 +36,14 @@
   notify:
     - restart drone
 
+- name: ensure the drone user exists
+  mysql_user: name={{ drone_mysql_user }} state=present password={{ drone_mysql_pass }} priv={{ drone_mysql_dbname}}.*:ALL
+  when: drone_driver == 'mysql'
+
+- name: ensure the drone database exists
+  mysql_db: name={{ drone_mysql_dbname }} state=present
+  when: drone_driver == 'mysql'
+
 - name: setup ssl cert
   copy: src={{ drone_sslcert_file }} dest={{ drone_sslcert_location }} owner=root group=root mode=0644
   when: drone_scheme == 'https'
