@@ -309,8 +309,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Dumping data for table `users`
 --
-
-LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 {% for user in drone_users %}
 {% if user['state']|default('present') == 'absent' %}
