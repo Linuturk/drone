@@ -19,10 +19,9 @@
 -- Table structure for table `builds`
 --
 
-DROP TABLE IF EXISTS `builds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `builds` (
+CREATE TABLE IF NOT EXISTS `builds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commit_id` int(11) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
@@ -52,13 +51,9 @@ UNLOCK TABLES;
 -- Table structure for table `commits`
 --
 
-DROP TABLE IF EXISTS `commits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commits` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `repo_id` int(11) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `commits` (
   `started` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `finished` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `duration` int(11) DEFAULT NULL,
@@ -92,10 +87,9 @@ UNLOCK TABLES;
 -- Table structure for table `members`
 --
 
-DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `members` (
+CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `team_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -120,10 +114,9 @@ UNLOCK TABLES;
 -- Table structure for table `migration`
 --
 
-DROP TABLE IF EXISTS `migration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `migration` (
+CREATE TABLE IF NOT EXISTS `migration` (
   `revision` bigint(20) NOT NULL,
   PRIMARY KEY (`revision`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -135,7 +128,6 @@ CREATE TABLE `migration` (
 
 LOCK TABLES `migration` WRITE;
 /*!40000 ALTER TABLE `migration` DISABLE KEYS */;
-INSERT INTO `migration` VALUES (1),(2),(201402200603),(201402211147),(20140310104446),(20140328201430);
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,10 +135,9 @@ UNLOCK TABLES;
 -- Table structure for table `repos`
 --
 
-DROP TABLE IF EXISTS `repos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `repos` (
+CREATE TABLE IF NOT EXISTS `repos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `slug` varchar(255) DEFAULT NULL,
   `host` varchar(255) DEFAULT NULL,
@@ -188,10 +179,9 @@ UNLOCK TABLES;
 -- Table structure for table `settings`
 --
 
-DROP TABLE IF EXISTS `settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `settings` (
+CREATE TABLE IF NOT EXISTS `settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `github_key` varchar(255) DEFAULT NULL,
   `github_secret` varchar(255) DEFAULT NULL,
@@ -219,7 +209,6 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'','','','','','','','','','localhost:49153','http','github.com','https://api.github.com',0,'gitlab.com','https://gitlab.com');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,10 +216,9 @@ UNLOCK TABLES;
 -- Table structure for table `teams`
 --
 
-DROP TABLE IF EXISTS `teams`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `teams` (
+CREATE TABLE IF NOT EXISTS `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `slug` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -256,10 +244,9 @@ UNLOCK TABLES;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -287,7 +274,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'justin@onitato.com','$2a$10$WQZSHkUbAwztLUFVOc.o/OmSK3UCVjcW4c2l09EAWlGEMwdawEDj6','JCVWeq13Idr0jvXNJSSpaQUkA9GJTv2ixOIS5wEk','Justin Phelps','50640714d69fcde6e889c3747d26dc31','2014-05-06 21:00:16','2014-05-06 21:00:16',1,'','','','','','');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
