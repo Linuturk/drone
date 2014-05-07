@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-REPLACE INTO `settings`
+INSERT INTO `settings`
     (
         id,
         github_key,
@@ -246,7 +246,23 @@ REPLACE INTO `settings`
         '{{ drone_hostname }}',
         '{{ drone_scheme }}',
         {{ drone_open_invitations|int }}
-    );
+    )
+    ON DUPLICATE KEY UPDATE
+        id=1,
+        github_key='{{ drone_github_key }}',
+        github_secret='{{ drone_github_secret }}',
+        github_domain='{{ drone_github_domain }}',
+        github_apiurl='{{ drone_github_apiurl }}',
+        bitbucket_key='{{ drone_bitbucket_key }}',
+        bitbucket_secret='{{ drone_bitbucket_secret }}',
+        smtp_server='{{ drone_smtp_server }}',
+        smtp_port='{{ drone_smtp_port }}',
+        smtp_address='{{ drone_smtp_address }}',
+        smtp_username='{{ drone_smtp_username }}',
+        smtp_password='{{ drone_smtp_password }}',
+        hostname='{{ drone_hostname }}',
+        scheme='{{ drone_scheme }}',
+        open_invitations={{ drone_open_invitations|int }};
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
