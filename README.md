@@ -26,7 +26,6 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 * `password` bcrypt password hash (optional, you will have to use forgot password to set a password)
 * `admin` True/False (boolean). Default `False`.
 * `state` present/absent. Default `present`
-* `update_password` True/False (boolean). Default `False`. Setting as True will ensure the specified password.
 
 #### bcrypt password hash
 
