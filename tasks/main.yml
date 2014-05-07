@@ -33,12 +33,23 @@
 
 - name: Template SQL file for drone configuration
   template:
-    src: drone.sql.j2
+    src: sqlite.sql.j2
     dest: /etc/drone/drone.sql
     owner: root
     group: root
     mode: 0600
   register: drone_sql
+  when: drone_driver == 'sqlite3'
+
+- name: Template SQL file for drone configuration
+  template:
+    src: mysql.sql.j2
+    dest: /etc/drone/drone.sql
+    owner: root
+    group: root
+    mode: 0600
+  register: drone_sql
+  when: drone_driver == 'mysql'
 
 - name: Install sqlite3 for drone configuration
   apt:
