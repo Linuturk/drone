@@ -364,36 +364,18 @@ INSERT INTO `users`
         '{{ user["bitbucket_secret"]|default("") }}'
     )
     ON DUPLICATE KEY UPDATE
-{% if user.email %}
         email='{{ user.email }}',
-{% endif %}
-{% if user['update_password']|default(False) %}
         password='{{ user["password"]|default("") }}',
-{% endif %}
         token='{{ user.email|md5|b64encode|truncate(40, True, '') }},
-{% if user.name %}
         name='{{ user.name }}',
-{% endif %}
         gravatar='{{ user.email|md5 }}',
         updated=NOW(),
-{% if user.admin %}
         admin={{ user["admin"]|default(True)|int }},
-{% endif %}
-{% if user.github_login %}
         github_login='{{ user["github_login"]|default("") }}',
-{% endif %}
-{% if user.github_token %}
         github_token='{{ user["github_token"]|default("") }}',
-{% endif %}
-{% if user.bitbucket_login %}
         bitbucket_login='{{ user["bitbucket_login"]|default("") }}',
-{% endif %}
-{% if user.bitbucket_token %}
         bitbucket_token='{{ user["bitbucket_token"]|default("") }}',
-{% endif %}
-{% if user.bitbucket_secret %}
         bitbucket_secret='{{ user["bitbucket_secret"]|default("") }}';
-{% endif %}
 {% endif %}
 {% endfor %}
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
