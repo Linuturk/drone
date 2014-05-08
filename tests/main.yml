@@ -1,5 +1,4 @@
 ---
 - hosts: localhost
   roles:
-    - Rackspace_Automation.base
     - Rackspace_Automation.drone
