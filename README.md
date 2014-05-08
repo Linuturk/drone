@@ -3,7 +3,7 @@ Role Name
 
 This role installs drone if it isn't already installed. This doesn't perform any extra configuration.
 
-[![Build Status](http://drone.onitato.com/github.com/rack-roles/drone/status.svg?branch=master)](http://drone.onitato.com/github.com/rack-roles/drone)
+[![Build Status](https://drone-opsdev.rax.io/github.com/rack-roles/drone/status.svg?branch=master)](https://drone-opsdev.rax.io/github.com/rack-roles/drone)
 
 Requirements
 ------------
