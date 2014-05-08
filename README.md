@@ -47,6 +47,7 @@ Dependencies
 ------------
 
 `Rackspace_Automation.docker`
+`Rackspace_Automation.mysql`
 
 Example Playbook
 -------------------------
