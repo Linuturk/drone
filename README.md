@@ -1,4 +1,4 @@
-Role Name
+drone
 ========
 
 This role installs drone if it isn't already installed. This doesn't perform any extra configuration.
@@ -16,6 +16,10 @@ Role Variables
 ### Upgrades
 
 Drone does not currently offer an apt repository, to upgrade to a new verison supply `--extra-vars upgrade_drone=true` with your `ansible-playbook` run.
+
+### Restoring
+
+* `drone_mysql_backup` Set this variable to the file that contains a database dump, and the role will copy it to the remote server and attempt an import.
 
 ### Daemon
 
