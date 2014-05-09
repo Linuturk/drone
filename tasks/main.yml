@@ -44,8 +44,11 @@
   mysql_db: name={{ drone_mysql_dbname }} state=present
   when: drone_driver == 'mysql'
 
-- name: restore from backup
+- name: copy database backup to server
   copy: src={{ drone_mysql_backup }} dest=/tmp
+  when: drone_mysql_backup is defined
+
+- name: restore from backup
   mysql_db: name={{ drone_mysql_dbname }} state=import target=/tmp/{{ drone_mysql_backup }}
   when: drone_mysql_backup is defined
 
