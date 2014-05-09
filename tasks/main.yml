@@ -45,7 +45,8 @@
   when: drone_driver == 'mysql'
 
 - name: restore from backup
-  mysql_db: name={{ drone_mysql_dbname }} state=import target={{ drone_mysql_backup }}
+  copy: src={{ drone_mysql_backup }} dest=/tmp
+  mysql_db: name={{ drone_mysql_dbname }} state=import target=/tmp/{{ drone_mysql_backup }}
   when: drone_mysql_backup is defined
 
 - name: setup ssl cert
