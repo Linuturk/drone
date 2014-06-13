@@ -5,8 +5,8 @@ drone_hostname: "{{ ansible_ssh_host|default(inventory_hostname) }}"
 drone_port: 80
 drone_sslcert_location: ""
 drone_sslkey_location: ""
-drone_sslcert_file: ""
-drone_sslkey_file: ""
+drone_sslcert: ""
+drone_sslkey: ""
 drone_path: ""
 
 drone_driver: "sqlite3"

@@ -28,8 +28,8 @@ Drone does not currently offer an apt repository, to upgrade to a new verison su
 * `drone_scheme` http or https (https requires `drone_sslcert` and `drone_sslkey` and probably `drone_port` configured for `443`)
 * `drone_sslcert_location` Path to SSL certificate on the server.
 * `drone_sslkey_location` Path to SSL key on the server.
-* `drone_sslcert_file` Path to SSL certificate from your playbook.
-* `drone_sslkey_file` Path to SSL key from your playbook.
+* `drone_sslcert` Variable containing your SSL certificate.
+* `drone_sslkey` Variable containing your SSL key.
 
 ### Datasource
 
