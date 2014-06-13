@@ -33,8 +33,7 @@
 
 - name: configure drone daemon
   template: src=default.j2 dest=/etc/default/drone owner=root group=root mode=0644
-  notify:
-    - restart drone
+  notify: restart drone
 
 - name: ensure the drone user exists
   mysql_user: name={{ drone_mysql_user }} state=present password={{ drone_mysql_pass }} priv={{ drone_mysql_dbname}}.*:ALL
@@ -54,10 +53,12 @@
 
 - name: setup ssl cert
   template: src=sslcert.j2 dest={{ drone_sslcert_location }} owner=root group=root mode=0644
+  notify: restart drone
   when: drone_scheme == 'https'
 
 - name: setup ssl key
   template: src=sslkey.j2 dest={{ drone_sslkey_location }} owner=root group=root mode=0600
+  notify: restart drone
   when: drone_scheme == 'https'
 
 - name: ensure drone is started
