@@ -18,7 +18,7 @@
   set_fact: install_drone={{ not drone_stat.stat.exists or upgrade_drone|default(False)|bool == True }}
 
 - name: pull down latest deb file
-  get_url: url=http://downloads.drone.io/latest/drone.deb dest=/tmp/drone.deb force={{ install_drone|default(False)|bool }}
+  get_url: url=http://downloads.drone.io/master/drone.deb dest=/tmp/drone.deb force={{ install_drone|default(False)|bool }}
   register: got_drone
 
 - name: install drone
@@ -32,7 +32,7 @@
     - restart drone
 
 - name: configure drone daemon
-  template: src=default.j2 dest=/etc/default/drone owner=root group=root mode=0644
+  template: src=drone.toml.j2 dest=/etc/drone/drone.toml owner=root group=root mode=0600
   notify: restart drone
 
 - name: ensure the drone user exists

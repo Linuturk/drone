@@ -1,0 +1,65 @@
+[server]
+port="{{ drone_port }}"
+
+{% if drone_sslkey_location is defined %}
+[server.ssl]
+key="{{ drone_sslkey_location }}"
+cert="{{ drone_sslcert_location }}"
+{% endif %}
+
+{% if drone_secret is defined %}
+[session]
+secret="{{ drone_secret }}"
+expires="{{ drone_expires }}"
+{% endif %}
+
+[database]
+driver="{{ drone_driver }}"
+datasource="{{ drone_datasource }}"
+
+[registration]
+open={{ drone_registration_open }}
+
+{% if drone_github_client is defined %}
+[github]
+client="{{ drone_github_client }}"
+secret="{{ drone_github_secret }}"
+{% endif %}
+
+{% if drone_github_entreprise_client is defined %}
+[github_enterprise]
+client="{{ drone_github_entreprise_client }}"
+secret="{{ drone_github_entreprise_secret }}"
+api="{{ drone_github_entreprise_api }}"
+url="{{ drone_github_entreprise_url }}"
+private_mode="{{ drone_github_entreprise_private_mode }}"
+{% endif %}
+
+{% if drone_bitbucket_client is defined %}
+[bitbucket]
+client="{{ drone_bitbucket_client }}"
+secret="{{ drone_bitbucket_secret }}"
+{% endif %}
+
+{% if drone_gitlab_url is defined %}
+[gitlab]
+url="{{ drone_gitlab_url }}"
+{% endif %}
+
+{% if drone_smtp_host is defined %}
+[smtp]
+host="{{ drone_smtp_host }}"
+port="{{ drone_smtp_port }}"
+from="{{ drone_smtp_from }}"
+user="{{ drone_smtp_user }}"
+pass="{{ drone_smtp_pass }}"
+{% endif %}
+
+[worker]
+{% if drone_worker_cert is defined %}
+cert="{{ drone_worker_cert }}"
+{% endif %}
+{% if drone_worker_key is defined %}
+key="{{ drone_worker_key }}"
+{% endif %}
+nodes=[ "{{ drone_nodes|join('", "') }}" ]
