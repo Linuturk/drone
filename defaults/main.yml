@@ -1,18 +1,8 @@
 ---
 # defaults file for drone
-drone_scheme: "http"
-drone_hostname: "{{ ansible_ssh_host|default(inventory_hostname) }}"
-drone_port: 80
-drone_sslcert_location: ""
-drone_sslkey_location: ""
-drone_sslcert: ""
-drone_sslkey: ""
-drone_path: ""
+drone_port: ":80"
 
 drone_driver: "sqlite3"
-drone_datasource: "drone.sqlite"
-drone_mysql_user: "drone"
-drone_mysql_pass: "changeme123"
-drone_mysql_host: "localhost"
-drone_mysql_port: "3306"
-drone_mysql_dbname: "drone_io"
+drone_datasource: "/var/lib/drone/drone.sqlite"
+
+drone_nodes: [ "unix:///var/run/docker.sock" ]
